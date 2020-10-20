@@ -1,0 +1,13 @@
+# @Time:2020/10/13 17:26
+# @Auth:Shuangqi.Cui
+# @File:Config.yaml.py
+# @IDE:PyCharm
+
+# URL
+url: https://172.16.101.102
+# 登录名
+loginName: admin
+# 登录密码
+loginPassword: xontel
+# 固件名称(固件请放到Firmware_File目录下)
+firmwareName: UC-Series-4.1.7-2009-20200911-XonTel-Internal-Release.bin
