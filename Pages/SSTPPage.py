@@ -21,7 +21,18 @@ class SSTPPage(BasePage):
         self.click(self.sstp_button)
 
     def get_client_ip(self):
-        pass
+        if self.is_checked(self.enable_sstp):
+            now_connect_status = self.get_element_text(self.connect_status)
+            while True:
+                if now_connect_status == "" or now_connect_status == "Connecting":
+                    print("等待连接中...")
+                elif now_connect_status == "Failed":
+                    return "null"
+                elif now_connect_status == "Connected":
+                    ci = self.get_element_text(self.client_ip)
+                    return ci
+        else:
+            return "null"
 
     def read_sstp_configinfo(self):
         SSTP_Info = {}

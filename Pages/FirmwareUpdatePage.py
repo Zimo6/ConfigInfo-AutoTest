@@ -56,8 +56,7 @@ class FirmwareUpdatePage(BasePage):
             self.click(self.update_fail_button)
         else:
             # 升级中
-            update_flag = True
-            while update_flag:
+            while True:
                 sleep(3)
                 update_phase = self.get_element_text(self.update_phase_message)
                 update_percentage = self.get_element_text(self.update_percent_message)
@@ -66,7 +65,6 @@ class FirmwareUpdatePage(BasePage):
                     print("更新成功，请等待系统重启")
                     sleep(8)
                     self.is_click(self.reboot_button)
-                    update_flag = False
                     return "success"
                 if self.get_element_text(self.update_message) == "Files Upload format error":
                     # 升级失败

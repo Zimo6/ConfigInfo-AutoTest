@@ -1,0 +1,5 @@
+NetWorkParameters_GateWay: 172.16.0.1
+NetWorkParameters_IPAddress: 172.16.101.102
+NetWorkParameters_Mask: 255.255.0.0
+NetWorkParameters_WorkMode: Single
+VPNClient_OpenVNP_ClientIP: 10.8.0.11

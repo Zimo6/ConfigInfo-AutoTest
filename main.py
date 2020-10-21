@@ -1,5 +1,5 @@
 import unittest
-from datetime import time
+import time
 from common import HTMLTestRunner
 
 
@@ -12,17 +12,14 @@ def get_test_cases(dir_path):
         test_cases.addTests(suite)
     return test_cases
 
-
 """
 main 函数启动的话，配置文件路径为 “./”
 TestCases 函数启动的话，配置文件路径为 “../”
 """
 if __name__ == '__main__':
     cases = get_test_cases('./TestCase')
-    # now = time.strftime("%Y-%m-%d %H_%M_%S")  # 报告生成时间
-    now = "2020-10-11-"
-    filename = './report/' + now + 'report.html'  # 设置报告文件名
-    fp = open(filename, 'wb')
-    runner = HTMLTestRunner.HTMLTestRunner(stream=fp, title=u'Web自动化测试', description=u'详细测试结果如下:')
-    runner.run(cases)
-    fp.close()
+    now_time = time.strftime("%Y-%m-%d", time.localtime())
+    filename = './report/' + now_time + '-report.html'  # 设置报告文件名
+    with open(filename, 'wb') as fp:
+        runner = HTMLTestRunner.HTMLTestRunner(stream=fp, title=u'系统升级前后配置信息-自动化测试报告', description=u'详细测试结果如下:')
+        runner.run(cases)

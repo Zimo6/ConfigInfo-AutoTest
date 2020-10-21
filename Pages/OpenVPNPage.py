@@ -28,9 +28,16 @@ class OpenVPNPage(BasePage):
         self.click(self.openvpn_button)
 
     def get_client_ip(self):
-        dict_client_ip = self.read_openvpn_configinfo()
-        if dict_client_ip != "null":
-            return dict_client_ip['VPNClient_OpenVNP_ServerIPAddress']
+        if self.is_checked(self.enable_openvpn):
+            now_connect_status = self.get_element_text(self.connect_status)
+            while True:
+                if now_connect_status == "" or now_connect_status == "Connecting":
+                    print("等待连接中...")
+                elif now_connect_status == "Failed":
+                    return "null"
+                elif now_connect_status == "Connected":
+                    ci = self.get_element_text(self.client_ip)
+                    return ci
         else:
             return "null"
 

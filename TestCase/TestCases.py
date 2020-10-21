@@ -70,6 +70,15 @@ class TestIndexPage(unittest.TestCase):
         if openvpn_info != "null":
             openvpn.dict_to_yaml(openvpn_info)
 
+#    @unittest.skip("")
+    def test004_Read_SSTPPage(self):
+        sstp = SSTPPage(self.driver, self.url)
+        sstp.click_sstp_button()
+        sleep(1)
+        sstp_info = sstp.read_sstp_configinfo()
+        if sstp_info != "null":
+            sstp.dict_to_yaml(sstp_info)
+
     # 未正是测试则跳过该用例
     @unittest.skip("跳过固件更新用例")
     def test088_FirmwareUpdate(self):
@@ -142,5 +151,16 @@ class TestIndexPage(unittest.TestCase):
         openvpn.click_openvpn_button()
         sleep(1)
         update_after_client_ip = openvpn.get_client_ip()
-        update_before_client_ip = BasePage.update_before_config()['VPNClient_OpenVNP_ClientIP']
-        self.assertEqual(update_before_client_ip, update_after_client_ip)
+        if update_after_client_ip != "null":
+            update_before_client_ip = BasePage.update_before_config()['VPNClient_OpenVNP_ClientIP']
+            self.assertEqual(update_before_client_ip, update_after_client_ip)
+            print("升级后OpenVpn 已读取")
+
+    def test102_SSTP(self):
+        sstp = SSTPPage(self.driver, self.url)
+        sstp.click_sstp_button()
+        sleep(1)
+        update_after_client_ip = sstp.get_client_ip()
+        if update_after_client_ip != "null":
+            update_before_client_ip = BasePage.update_before_config()['VPNClient_SSTP_ClientIP']
+            self.assertEqual(update_before_client_ip, update_after_client_ip)
